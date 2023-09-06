@@ -6,13 +6,13 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:27:31 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/05 19:17:27 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:06:12 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(void)
+int	ft_pwd(void)
 {
 	char	*buffer;
 	char	*current_directory;
@@ -30,6 +30,8 @@ void	ft_pwd(void)
 		free(buffer);
 		exit(EXIT_FAILURE);
 	}
-	printf("%s\n", current_directory);
+	ft_putstr_fd(current_directory, STDOUT_FILENO);
+	//printf("%s\n", current_directory);
 	free(buffer);
+	return (EXIT_SUCCESS);
 }
