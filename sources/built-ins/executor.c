@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/09 17:40:51 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:57:53 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools)
 	while (exec_list)
 	{
 		if (ft_strcmp(exec_list->cmd[0], "pwd") == 0)
-		{
 			exit = ft_pwd();
-		}
+		if (ft_strcmp(exec_list->cmd[0], "echo") == 0)
+			ft_echo(exec_list);
 		exec_list = exec_list->next;
 	}
 }
