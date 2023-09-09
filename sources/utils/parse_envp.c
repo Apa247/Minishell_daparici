@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:33:17 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/05 19:27:47 by daparici         ###   ########.fr       */
+/*   Updated: 2023/08/14 09:05:36 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**st_envp(char **envp)
 
 void	show_env(t_toolbox *tools)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	printf("\n---unsorted env---\n");
@@ -79,70 +79,25 @@ void	show_env(t_toolbox *tools)
 
 char	**envp_dup(char	**envp, t_toolbox *tools)
 {
-	t_env	*temp;
-
-	if (!lst)
-		return (NULL);
-	temp = lst;
-	while (temp->next != NULL)
-		temp = temp->next;
-	return (temp);
-}
-
-void	env_lstadd_back_m(t_env **lst, t_env *new)
-{
-	t_env	*tmp;
-
-	if (lst)
-	{
-		if (*lst == NULL)
-			*lst = new;
-		else
-		{
-			tmp = env_lstlast(*(lst));
-			tmp->next = new;
-		}
-	}
-}
-
-t_env	*env_lstnew_m(char *content)
-{
-	t_env	*new;
-
-	new = malloc(sizeof(t_env));
-	if (new == NULL)
-		return (NULL);
-	new->var = ft_strdup(content);
-	if (!new->var)
-	{
-		free_arr(new->var);
-		return (NULL);
-	}
-	new->next = NULL;
-	return (new);
-}
-
-void	ft_lstlast_p_2(t_env *lst)
-{
-	while (lst)
-	{
-		printf("%s\n", lst->var);
-		lst = lst->next;
-	}
-}
-
-void	envp_dup(char	**envp, t_toolbox *tools)
-{
+	char	**tmp;
 	int		i;
-	t_env	*new;
-	t_env	*start;
 
-	start = tools->env;
+	(void)tools;
+	i = 0;
+	while (envp[i])
+		i++;
+	tmp = ft_calloc(sizeof(char *), i + 1);
+	if (!tmp)
+		return (NULL);
 	i = 0;
 	while (envp[i])
 	{
-		new = ft_lstnew_m(envp[i]);
-		ft_lstadd_back(&tools->env, new);
+		tmp[i] = ft_strdup(envp[i]);
+		if (!tmp[i])
+		{
+			free_arr(tmp);
+			return (NULL);
+		}
 		i++;
 	}
 	tools->env = tmp;

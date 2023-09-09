@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:07:55 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/05 19:27:28 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:01:39 by davidaparic      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ typedef struct	s_sp_cmds
 	struct s_sp_cmds	*prev;
 }	t_sp_cmds;
 
-typedef struct s_env
+/*typedef struct s_env
 {
 	char	*var;
 	void	*next;
-}	t_env;
+}	t_env;*/
 
 typedef struct	s_toolbox
 {
 	char		*args;
 	char		**env;
 	char		**sort_env;
-	t_env		envp;
-	t_env		sort_envp;
+	//t_env		envp;
+	//t_env		sort_envp;
 	char		*env_rute;
 	char		*pwd;
 	char		*old_pwd;
@@ -79,18 +79,18 @@ typedef struct	s_p_toolbox
 }	t_p_toolbox;
 
 //signal functions
-void		signals_workout(void);
+void	signals_workout(void);
 
 //t_lexer functions
 
-void		lexer_addback(t_lexer **head, t_lexer *new);
-void		lexer_add(t_lexer **head, t_lexer *new);
-void		lexer_delone(t_lexer **list);
-void		lexer_free(t_lexer *list);
-void		lexer_show(t_lexer *list); //free list only for testting
-int			lexer_length(t_lexer *list);
-t_lexer		*lexer_new(char	*str, t_token token);
-t_lexer		*lexer_last(t_lexer *list);
+void	lexer_addback(t_lexer **head, t_lexer *new);
+void	lexer_add(t_lexer **head, t_lexer *new);
+void	lexer_delone(t_lexer **list);
+void	lexer_free(t_lexer *list);
+void	lexer_show(t_lexer *list); //free list only for testting
+int		lexer_length(t_lexer *list);
+t_lexer	*lexer_new(char	*str, t_token token);
+t_lexer	*lexer_last(t_lexer *list);
 
 //t_sp_cmds functions
 void		sp_cmds_addback(t_sp_cmds **head, t_sp_cmds *new);
@@ -110,30 +110,31 @@ int			token_handler(t_toolbox *tools, int i);
 t_token		check_token(char *tk, int i);
 
 //loop functions
-int			minishell_loop(t_toolbox *tools);
-int			tools_load(t_toolbox *tools);
-void		tools_reload(t_toolbox *tools);
+int		minishell_loop(t_toolbox *tools);
+int		tools_load(t_toolbox *tools);
+void	tools_reload(t_toolbox *tools);
 
 //enviroment functions
-char		**envp_dup(char **envp, t_toolbox *tools);
+char	**envp_dup(char **envp, t_toolbox *tools);
 //char	 **st_envp(t_toolbox *tools, char **env);
-int			pwd_search(t_toolbox *tools);
-t_env		*env_lstnew_m(char *content);
-void		env_lstadd_back(t_env **lst, t_env *new);
-t_env		*env_lstlast(t_env *lst);
-void		ft_lstlast_p_2(t_env *lst);
+int		pwd_search(t_toolbox *tools);
 
 //utility functions
-void		free_arr(char **arr);
-int			handle_quotes(char *input);
-int			check_input(t_toolbox *tools);
-int			exit_code(void);
+void	free_arr(char **arr);
+int		handle_quotes(char *input);
+int		check_input(t_toolbox *tools);
+int		exit_code(void);
 
 //error functions
-int			error_msg(char *msg);
-int			error_token(t_token token);
+int		error_msg(char *msg);
+int		error_token(t_token token);
 
-//Built-ins functions
-void		ft_pwd(void);
+//built-ins funcion
+//echo
+void	ft_echo(t_sp_cmds *sp_cmds);
+void	print_arguments(char **arg, int i);
+
+
+
 
 #endif
