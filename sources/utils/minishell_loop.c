@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:14:37 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/08/09 09:10:33 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:21:06 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	exit_code(void)
 
 int	minishell_loop(t_toolbox *tools)
 {
-	//char	*input;
-	int		exit;
+	int			exit;
+	t_sp_cmds	*exec_lst;
 
 	while (1)
 	{
@@ -55,7 +55,8 @@ int	minishell_loop(t_toolbox *tools)
 			if (!handle_quotes(tools->args))
 			{
 				token_reader(tools);
-				parser(tools);
+				exec_lst = parser(tools);
+				ft_executor(exec_lst, tools);
 			}
 			tools_reload(tools);
 		}

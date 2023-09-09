@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 10:28:15 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/09 17:18:32 by daparici         ###   ########.fr       */
+/*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
+/*   Updated: 2023/09/09 17:40:51 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	leaks(void)
+void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools)
 {
-	system("leaks minishell");
-}
+	int	exit;
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_toolbox	tools;
-
-	atexit(leaks);
-	if (argc != 1 || argv[1])
+	exit = 0;
+	(void)tools;
+	while (exec_list)
 	{
-		printf("Minishell must be executed wihtout arguments");
-		exit(0);
+		if (ft_strcmp(exec_list->cmd[0], "pwd") == 0)
+		{
+			exit = ft_pwd();
+		}
+		exec_list = exec_list->next;
 	}
-	tools.env = envp_dup(envp, &tools);
-	tools_load(&tools);
-	pwd_search(&tools);
-	minishell_loop(&tools);
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:07:55 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:39 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/09/09 17:28:44 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,11 @@ typedef struct	s_sp_cmds
 	struct s_sp_cmds	*prev;
 }	t_sp_cmds;
 
-/*typedef struct s_env
-{
-	char	*var;
-	void	*next;
-}	t_env;*/
-
 typedef struct	s_toolbox
 {
 	char		*args;
 	char		**env;
 	char		**sort_env;
-	//t_env		envp;
-	//t_env		sort_envp;
 	char		*env_rute;
 	char		*pwd;
 	char		*old_pwd;
@@ -103,7 +95,7 @@ t_sp_cmds	*sp_cmds_new(char **cmd, int token);
 t_sp_cmds	*sp_cmds_last(t_sp_cmds *list);
 
 //parse functions
-int			parser(t_toolbox *tools);
+t_sp_cmds	*parser(t_toolbox *tools);
 int			file_checker(char *str, char c);
 int			token_reader(t_toolbox *tools);
 int			token_handler(t_toolbox *tools, int i);
@@ -130,11 +122,10 @@ int		error_msg(char *msg);
 int		error_token(t_token token);
 
 //built-ins funcion
-//echo
+void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools);
+//  echo
 void	ft_echo(t_sp_cmds *sp_cmds);
 void	print_arguments(char **arg, int i);
-
-
-
-
+//  pwd
+int		ft_pwd(void);
 #endif

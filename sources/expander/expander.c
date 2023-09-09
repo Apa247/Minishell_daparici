@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 08:40:43 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/08/18 09:15:43 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:32:21 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_quotes(char *str)
 		while (str[i])
 		{
 			if (str[i] == str[0])
-			return (1);
+				return (1);
 			i++;
 		}
 		if (str[i] == '\0')
@@ -110,10 +110,10 @@ char	*expander(t_toolbox *tools, char *str)
 		else
 		{
 			error_msg("Global var sintax error");
-			return (NULL)
+			return (NULL);
 		}
 	}
 	else if (str[0] == '$')
 		var = extract_var(tools->env, str, 0);
-	return (var);
+	return(var);
 }

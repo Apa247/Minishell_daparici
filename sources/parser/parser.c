@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:25:35 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/08/09 08:50:11 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:29:04 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,17 @@ t_sp_cmds	*cmds_extract(t_lexer *list)
 	return (node);
 }
 
-int	parser(t_toolbox *tools)
+t_sp_cmds	*parser(t_toolbox *tools)
 {
 	t_sp_cmds	*node;
 	t_p_toolbox	p_tools;
 
-	if (tools->lexer_list->token == PIPE)
-		return (error_token(tools->lexer_list->token));
+	// if (tools->lexer_list->token == PIPE)
+	// 	return (error_token(tools->lexer_list->token));
 	node = NULL;
 	p_tools = init_p_tools(tools);
 	node = cmds_extract(p_tools.lexer_list);
-	sp_cmds_show(node);
-	sp_cmds_free(node);
-	return (0); }
+	// sp_cmds_show(node);
+	// sp_cmds_free(node);
+	return (node);
+}
