@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/17 10:28:15 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/14 14:01:06 by davidaparic      ###   ########.fr       */
+/*   Created: 2023/09/14 13:39:05 by davidaparic       #+#    #+#             */
+/*   Updated: 2023/09/14 14:16:29 by davidaparic      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	leaks(void)
+void    ft_env(char **env)
 {
-	system("leaks minishell");
-}
+    int i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_toolbox	tools;
-
-	atexit(leaks);
-	if (argc != 1 || argv[1])
-	{
-		printf("Minishell must be executed wihtout arguments");
-		exit(0);
-	}
-	tools.env = envp_dup(envp, &tools);
-	tools_load(&tools);
-	pwd_search(&tools);
-	minishell_loop(&tools);
-	return (0);
+    i = 0;
+    while(env[i])
+    {
+        ft_putendl_fd(env[i], STDOUT_FILENO);
+        i++;
+    }
 }
