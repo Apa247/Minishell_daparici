@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/15 12:30:48 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/09/19 17:18:31 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools)
 	int	exit;
 
 	exit = 0;
-	(void)tools;
 	while (exec_list)
 	{
 		if (ft_strcmp(exec_list->cmd[0], "pwd") == 0)

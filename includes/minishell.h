@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:07:55 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/15 12:38:03 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/09/19 17:39:59 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,9 @@ int			ft_pwd(void);
 //	env
 void		ft_env(char **env);
 //	export
+void		export_error(char *cmd_arg)
 void   		ft_export(t_toolbox *tools, t_sp_cmds *exec_list);
 void    	print_export(char **env);
 int			check_parametres(char *cmd_arg);
+int			check_variable_exist(t_toolbox *tools, char *cmd_arg);
 #endif

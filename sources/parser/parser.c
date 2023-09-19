@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:25:35 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/09 17:29:04 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:42:11 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ t_sp_cmds	*parser(t_toolbox *tools)
 	t_p_toolbox	p_tools;
 
 	// if (tools->lexer_list->token == PIPE)
-	// 	return (error_token(tools->lexer_list->token));
+	//  	return (error_token(tools->lexer_list->token));
 	node = NULL;
 	p_tools = init_p_tools(tools);
 	node = cmds_extract(p_tools.lexer_list);
-	// sp_cmds_show(node);
-	// sp_cmds_free(node);
+	sp_cmds_show(node);
+	//sp_cmds_free(node);
 	return (node);
 }
