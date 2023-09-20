@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:31:45 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/07/26 10:24:27 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/09/20 10:59:38 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,30 @@
 t_sp_cmds	*sp_cmds_new(char	**cmd, int token)
 {
 	t_sp_cmds	*new;
-	int			i;
+	int			j;
+	int			a;
 
 	new = malloc(sizeof(t_sp_cmds));
 	if (!new)
 		return (NULL);
-	i = 0;
-	if (!file_checker(cmd[i], '.'))
-		new->cmd = cmd;
-	while (cmd[i])
+	j = 0;
+	a = 0;
+	while (cmd[j++])
 	{
-		if (file_checker(cmd[i], '.'))
-			new->file = ft_strdup(cmd[i]);
-		i++;
+		if (file_checker(cmd[j]) == 1)
+			a++;
 	}
-	if (new->file)
-		free_arr(cmd);
-	else
-		new->file = NULL;
+	new->cmd = malloc(sizeof(char *) * (j - a) + 1);
+	j = 0;
+	while (cmd[j])
+	{
+		if (file_checker(cmd[j]) == 1)
+			new->file = ft_strdup(cmd[j]);
+		else
+			new->cmd[j] = ft_strdup(cmd[j]);
+		j++;
+	}
+	free_arr(cmd);
 	new->token = token;
 	new->next = NULL;
 	new->prev = NULL;

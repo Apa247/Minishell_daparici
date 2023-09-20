@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:07:55 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/19 17:39:59 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:40:51 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,44 +96,51 @@ t_sp_cmds	*sp_cmds_last(t_sp_cmds *list);
 
 //parse functions
 t_sp_cmds	*parser(t_toolbox *tools);
-int			file_checker(char *str, char c);
+int			file_checker(char *str);
 int			token_reader(t_toolbox *tools);
 int			token_handler(t_toolbox *tools, int i);
 t_token		check_token(char *tk, int i);
+void		check_exp(t_sp_cmds *node, t_toolbox *tools);
+void		cmd_trim(t_sp_cmds *node);
+char		*fully_prompt(char *input, char c);
 
 //loop functions
-int			minishell_loop(t_toolbox *tools);
-int			tools_load(t_toolbox *tools);
-void		tools_reload(t_toolbox *tools);
+int		minishell_loop(t_toolbox *tools);
+int		tools_load(t_toolbox *tools);
+void	tools_reload(t_toolbox *tools);
 
 //enviroment functions
-char		**envp_dup(char **envp, t_toolbox *tools);
+char	**envp_dup(char **envp, t_toolbox *tools);
 //char	 **st_envp(t_toolbox *tools, char **env);
-int			pwd_search(t_toolbox *tools);
+int		pwd_search(t_toolbox *tools);
 
 //utility functions
-void		free_arr(char **arr);
-int			handle_quotes(char *input);
-int			check_input(t_toolbox *tools);
-int			exit_code(void);
+char	*expander(t_toolbox *tools, char *str);
+void	free_arr(char **arr);
+int		handle_quotes(char *input);
+int		check_input(t_toolbox *tools);
+int		check_quotes(char *str);
+int		exit_code(void);
 
 //error functions
-int			error_msg(char *msg);
-int			error_token(t_token token);
+int		error_msg(char *msg);
+int		error_token(t_token token);
 
 //built-ins funcion
-void		ft_executor(t_sp_cmds *exec_list, t_toolbox *tools);
+void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools);
 //  echo
-void		ft_echo(t_sp_cmds *sp_cmds);
-void		print_arguments(char **arg, int i);
+void	ft_echo(t_sp_cmds *sp_cmds);
+void	print_arguments(char **arg, int i);
 //  pwd
-int			ft_pwd(void);
-//	env
-void		ft_env(char **env);
+int		ft_pwd(void);
+// 	env
+void	ft_env(char **env);
 //	export
-void		export_error(char *cmd_arg)
-void   		ft_export(t_toolbox *tools, t_sp_cmds *exec_list);
-void    	print_export(char **env);
-int			check_parametres(char *cmd_arg);
-int			check_variable_exist(t_toolbox *tools, char *cmd_arg);
+void	ft_export(t_toolbox *tools, t_sp_cmds *exec_list);
+char	**add_variable(char **sort_env, char *cmd_arg);
+void	print_export(char **env);
+void	export_error(char *cmd_arg);
+int		lenght_to_equal(char *cmd_arg);
+int		check_variable_exist(t_toolbox *tools, char *cmd_arg);
+int		check_parametres(char *cmd_arg);
 #endif

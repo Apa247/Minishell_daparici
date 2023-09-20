@@ -6,7 +6,7 @@
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:52:34 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/07/26 10:38:02 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/09/20 10:56:56 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	sp_cmds_free(t_sp_cmds *list)
 	{
 		while (list->next)
 		{
+			if (list->cmd)
+				free_arr(list->cmd);
 			if (list->file)
 				free(list->file);
-			else
-				free_arr(list->cmd);
 			list = list->next;
 			free(list->prev);
 		}
@@ -49,7 +49,7 @@ void	sp_cmds_free(t_sp_cmds *list)
 		{
 			if (list->file)
 				free(list->file);
-			else
+			if (list->cmd)
 				free_arr(list->cmd);
 		}
 		free(list);
@@ -83,3 +83,5 @@ void	sp_cmds_show(t_sp_cmds *list)
 		list = list->next;
 	}
 }
+
+

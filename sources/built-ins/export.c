@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:51:30 by davidaparic       #+#    #+#             */
-/*   Updated: 2023/09/19 18:02:19 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:39:28 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**add_variable(char **sort_env, char *cmd_arg)
 	i = 0;
 	while (sort_env[i])
 		i++;
-	copy_env = ft_calloc(i + 2, sizeof(char *);
+	copy_env = ft_calloc(i + 2, sizeof(char *));
 	if (!copy_env)
 		return (NULL);
 }
@@ -65,7 +65,7 @@ void	ft_export(t_toolbox *tools, t_sp_cmds *exec_list)
 			if (!check_parametres(exec_list->cmd[i])
 				&& !check_variable_exist(tools->sort_env, exec_list->cmd[i]))
 			{
-				tmp = 
+				tmp 
 			}
 			i++;
 		}

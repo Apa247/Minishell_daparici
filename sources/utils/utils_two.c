@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 14:52:14 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/08/04 16:39:50 by jverdu-r         ###   ########.fr       */
+/*   Created: 2023/09/19 10:53:31 by jverdu-r          #+#    #+#             */
+/*   Updated: 2023/09/20 10:18:22 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	signal_int(int code)
+char	*fully_prompt(char *input, char c)
 {
-	(void)code;
-	printf("minishell>");
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	char	*aux;
+	char	*pipe;
 
-void	signals_workout(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_int);
+	if (c == '|')
+		while (input[ft_strlen(input) - 1] == '|')
+		{
+			aux = readline(">");
+			pipe = input;
+			input = ft_strjoin(pipe, aux);
+			free(pipe);
+			free(aux);
+		}
+	return (input);
 }

@@ -6,35 +6,11 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 08:40:43 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/09 16:32:21 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:12:12 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/*char	*close_quote(char *str)
-{
-	char	input;
-	char	*aux;
-	char	*temp;
-
-	if (!str)
-		return (NULL);
-	input = readline(">");
-	while (input[ft_strlen(input) - 1] != str[0])
-	{
-		aux = readline(">");
-		temp = input;
-		input = ft_strjoin(temp, aux);
-		free(temp);
-		free(aux);
-	}
-	temp = str;
-	str = ft_strjoin(temp, input);
-	free(temp);
-	free(input);
-	return(str);
-}*///codigo reutilizable para echo built-in
 
 int	check_quotes(char *str)
 {
@@ -54,8 +30,7 @@ int	check_quotes(char *str)
 		if (str[i] == '\0')
 			return (2);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int	var_search(char **gvars, char *var)
@@ -79,10 +54,10 @@ char	*extract_var(char **vars, char *str, int quote)
 	char	*var;
 	char	**s_var;
 
-	part = 0;
+	part = 1;
 	if (quote == 1)
 	{
-		if (str[0] == '\"')
+		if  (str[0] == '\"')
 			part = 1;
 		var = ft_substr(str, 2, ft_strlen(str) - 3);
 	}
@@ -92,7 +67,10 @@ char	*extract_var(char **vars, char *str, int quote)
 	if (var_pos >= 0)
 	{
 		s_var = ft_split(vars[var_pos], '=');
-		return (s_var[part]);
+		free(var);
+		var = ft_strdup(s_var[part]);
+		free_arr(s_var);
+		return (var);
 	}
 	else
 		return (NULL);
@@ -100,20 +78,10 @@ char	*extract_var(char **vars, char *str, int quote)
 
 char	*expander(t_toolbox *tools, char *str)
 {
-	char	*var;
-
-	var = NULL;
-	if (str[0] == '\'' || str[0] == '\"')
-	{
-		if (check_quotes(str) == 1 && str[1] == '$')
-			var = extract(tools->env, str, 1);
-		else
-		{
-			error_msg("Global var sintax error");
-			return (NULL);
-		}
-	}
-	else if (str[0] == '$')
-		var = extract_var(tools->env, str, 0);
-	return(var);
+	if (str[0] == '\'')
+		return (ft_substr(str, 1, ft_strlen(str) - 2));
+	else if(str[0] == '\"')
+		return (extract_var(tools->sort_env, str, 1));
+	else
+		return (extract_var(tools->sort_env, str, 0));
 }
