@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:14:37 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/19 10:24:13 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:34:44 by davidaparic      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	minishell_loop(t_toolbox *tools)
 			{
 				token_reader(tools);
 				parser(tools);
+				printf("hola:  %s\n", tools->sp_cmds->cmd[0]);
+				ft_executor(tools);
 			}
 			tools_reload(tools);
 		}

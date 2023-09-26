@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/19 17:18:31 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:33:32 by davidaparic      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools)
+void	ft_executor(t_toolbox *tools)
 {
 	int	exit;
 
 	exit = 0;
-	while (exec_list)
+	while (tools->sp_cmds)
 	{
-		if (ft_strcmp(exec_list->cmd[0], "pwd") == 0)
+		if (ft_strcmp(tools->sp_cmds->cmd[0], "pwd") == 0)
 			exit = ft_pwd();
-		if (ft_strcmp(exec_list->cmd[0], "echo") == 0)
-			ft_echo(exec_list);
-		if (ft_strcmp(exec_list->cmd[0], "env") == 0)
+		if (ft_strcmp(tools->sp_cmds->cmd[0], "echo") == 0)
+			ft_echo(tools->sp_cmds);
+		if (ft_strcmp(tools->sp_cmds->cmd[0], "env") == 0)
 			ft_env(tools->env);
-		if (ft_strcmp(exec_list->cmd[0], "export") == 0)
-			ft_export(tools, exec_list);
-		exec_list = exec_list->next;
+		if (ft_strcmp(tools->sp_cmds->cmd[0], "export") == 0)
+			ft_export(tools, tools->sp_cmds);
+		tools->sp_cmds = tools->sp_cmds->next;
 	}
 }
+

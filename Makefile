@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: daparici <daparici@student.42.fr>          +#+  +:+       +#+         #
+#    By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 15:20:41 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/09/19 17:53:49 by daparici         ###   ########.fr        #
+#    Updated: 2023/09/25 20:18:26 by davidaparic      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS	=	sources/main.c \
 			sources/utils/signals.c \
 			sources/utils/minishell_loop.c \
 			sources/utils/utils.c \
+			sources/utils/utils_two.c \
 			sources/utils/parse_envp.c \
 			sources/lexer/lexer_utils_one.c \
 			sources/lexer/lexer_utils_two.c \
@@ -38,6 +39,7 @@ SRCS	=	sources/main.c \
 			sources/parser/sp_cmds_utils_one.c \
 			sources/parser/sp_cmds_utils_two.c \
 			sources/error/errors.c \
+			sources/expander/expander.c \
 			sources/built-ins/echo.c \
 			sources/built-ins/pwd.c \
 			sources/built-ins/executor.c \
@@ -49,7 +51,7 @@ SRCS	=	sources/main.c \
 
 OBJS	=	$(SRCS:%.c=%.o)
 
-READ	=  /System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
+READ	=  /usr/local/Cellar/readline/8.2.1
 #/System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
 #/usr/local/Cellar/readline/8.2.1
 #/System/Volumes/Data/Users/jverdu-r/.brew/Cellar/readline/8.2.1

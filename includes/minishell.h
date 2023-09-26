@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:07:55 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/20 12:40:51 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:32:08 by davidaparic      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ t_token		check_token(char *tk, int i);
 void		check_exp(t_sp_cmds *node, t_toolbox *tools);
 void		cmd_trim(t_sp_cmds *node);
 char		*fully_prompt(char *input, char c);
+void		exp_search(char **cmd, t_toolbox *tools);
+void		cmd_trim(t_sp_cmds *node);
 
 //loop functions
 int		minishell_loop(t_toolbox *tools);
@@ -127,7 +129,7 @@ int		error_msg(char *msg);
 int		error_token(t_token token);
 
 //built-ins funcion
-void	ft_executor(t_sp_cmds *exec_list, t_toolbox *tools);
+void	ft_executor(t_toolbox *tools);
 //  echo
 void	ft_echo(t_sp_cmds *sp_cmds);
 void	print_arguments(char **arg, int i);
@@ -138,9 +140,12 @@ void	ft_env(char **env);
 //	export
 void	ft_export(t_toolbox *tools, t_sp_cmds *exec_list);
 char	**add_variable(char **sort_env, char *cmd_arg);
+char	**add_var_loop(char ** sort_env, char **copy_env, char *cmd_arg);
 void	print_export(char **env);
 void	export_error(char *cmd_arg);
 int		lenght_to_equal(char *cmd_arg);
 int		check_variable_exist(t_toolbox *tools, char *cmd_arg);
 int		check_parametres(char *cmd_arg);
+
+
 #endif
