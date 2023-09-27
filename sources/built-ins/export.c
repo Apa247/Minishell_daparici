@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:51:30 by davidaparic       #+#    #+#             */
-/*   Updated: 2023/09/25 20:05:57 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/09/27 18:45:09 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,6 @@ void	print_export(char **env)
 	}
 }
 
-char	**add_var_loop(char **sort_env, char **copy_env, char *cmd_arg)
-{
-	int i;
-	
-	i = 0;
-	while (sort_env[i])
-	{
-		if (!sort_env[i + 1])
-		{
-			copy_env[i] = ft_strdup(sort_env[i]);
-			copy_env[i + 1] = ft_strdup(cmd_arg);
-		}
-		else
-			copy_env[i] = ft_strdup(sort_env[i]);
-		i++;
-	}
-	return(copy_env);
-}
-
 char	**add_variable(char **sort_env, char *cmd_arg)
 {
 	int		i;
@@ -66,31 +47,41 @@ char	**add_variable(char **sort_env, char *cmd_arg)
 	if (!copy_env)
 		return (NULL);
 	i = 0;
-	copy_env = add_var_loop(sort_env, copy_env, cmd_arg);
-	return(copy_env);
+	while (sort_env[i])
+	{
+		if (!sort_env[i + 1])
+		{
+			copy_env[i] = ft_strdup(sort_env[i]);
+			copy_env[i + 1] = ft_strdup(cmd_arg);
+		}
+		else
+			copy_env[i] = ft_strdup(sort_env[i]);
+		i++;
+	}
+	return (copy_env);
 }
 
-void	ft_export(t_toolbox *tools, t_sp_cmds *exec_list)
+void	ft_export(t_toolbox *tools)
 {
 	int		i;
 	char	**tmp;
 
 	i = 1;
-	if (exec_list->cmd[1] == NULL)
-	{
+	if (tools->sp_cmds->cmd[1] == NULL)
 		print_export(tools->sort_env);
-	}
 	else
 	{
-		while (exec_list->cmd[i])
+		while (tools->sp_cmds->cmd[i])
 		{
-			if (!check_parametres(exec_list->cmd[i])
-				&& !check_variable_exist(tools, exec_list->cmd[i]))
+			if (!check_parametres(tools->sp_cmds->cmd[i])
+				&& !check_variable_exist(tools, tools->sp_cmds->cmd[i]))
 			{
-				if (exec_list->cmd[i])
+				if (tools->sp_cmds->cmd[i])
 				{
-					tmp = add_variable(tools->sort_env, exec_list->cmd[i]);
+					tmp = add_variable(tools->sort_env, tools->sp_cmds->cmd[i]);
+					//printf("hola\n");
 					free_arr(tools->sort_env);
+					tools->sort_env = NULL;
 					tools->sort_env = tmp;
 				}
 			}

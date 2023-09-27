@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+         #
+#    By: daparici <daparici@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 15:20:41 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/09/25 20:18:26 by davidaparic      ###   ########.fr        #
+#    Updated: 2023/09/27 18:44:08 by daparici         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRCS	=	sources/main.c \
 
 OBJS	=	$(SRCS:%.c=%.o)
 
-READ	=  /usr/local/Cellar/readline/8.2.1
+READ	=  /System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
 #/System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
 #/usr/local/Cellar/readline/8.2.1
 #/System/Volumes/Data/Users/jverdu-r/.brew/Cellar/readline/8.2.1
@@ -60,7 +60,7 @@ READ	=  /usr/local/Cellar/readline/8.2.1
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT_A)
-			@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -lreadline -L $(READ)/lib -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -lreadline -L $(READ)/lib -o $(NAME) 
 			@echo "Linked into excutable \033[0;32mminishell\033[0m."
 
 $(LIBFT_A):	

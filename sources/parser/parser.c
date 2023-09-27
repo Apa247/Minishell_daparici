@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:25:35 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/25 20:35:30 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/09/26 11:01:31 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_sp_cmds	*parser(t_toolbox *tools)
 	node = cmds_extract(p_tools.lexer_list);
 	check_exp(node, tools);
 	cmd_trim(node);
-	sp_cmds_show(node);
-	sp_cmds_free(node);
+	//sp_cmds_show(node);
+	//sp_cmds_free(node);
 	return (node);
 }

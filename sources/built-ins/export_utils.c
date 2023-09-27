@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:52:40 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/20 12:40:55 by daparici         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:12:32 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ int	check_parametres(char *cmd_arg)
 			export_error(cmd_arg);
 			return (1);
 		}
-		printf("%c\n", cmd_arg[i]);
 		if ((cmd_arg[i] != '_') && (ft_isalnum(cmd_arg[i]) == 0))
 		{
-			printf("hola\n");
 			export_error(cmd_arg);
 			return (1);
 		}

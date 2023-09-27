@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/25 20:33:32 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/09/26 11:06:50 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_executor(t_toolbox *tools)
 		if (ft_strcmp(tools->sp_cmds->cmd[0], "env") == 0)
 			ft_env(tools->env);
 		if (ft_strcmp(tools->sp_cmds->cmd[0], "export") == 0)
-			ft_export(tools, tools->sp_cmds);
+			ft_export(tools);
 		tools->sp_cmds = tools->sp_cmds->next;
 	}
 }
