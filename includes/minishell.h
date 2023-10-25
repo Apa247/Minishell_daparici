@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:07:55 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/27 18:32:26 by daparici         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:27:01 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft/libft.h"
+#include "tokens.h"
 
-typedef enum	s_token
+typedef enum	s_bool
 {
-	PIPE = 1,
-	LESS,
-	LESS_LESS,
-	GREAT,
-	GREAT_GREAT,
-}	t_token;
+	FALSE = 0,
+	TRUE = 1
+}	t_bool;
 
 typedef struct	s_lexer
 {
@@ -83,6 +81,7 @@ void	lexer_show(t_lexer *list); //free list only for testting
 int		lexer_length(t_lexer *list);
 t_lexer	*lexer_new(char	*str, t_token token);
 t_lexer	*lexer_last(t_lexer *list);
+t_command   *cmd_extract(t_lexer *list);
 
 //t_sp_cmds functions
 void		sp_cmds_addback(t_sp_cmds **head, t_sp_cmds *new);

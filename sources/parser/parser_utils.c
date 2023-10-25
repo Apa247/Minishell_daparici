@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 08:11:35 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/09/27 18:40:31 by daparici         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:39:32 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	file_checker(char *str)
 		i = 0;
 		while (str[i])
 		{
-			if (str[i] == '.' && (str[i + 1] == '/' || str[i + 1] == '.'
-			||	str[i + 1] == '\0'))
+			if (str[i] == '.' && (str[i + 1] == '/' || str[i + 1] == '.' ||
+						str[i + 1] == '\0'))
 				return (0);
 			else if (str[i] == '.')
 				return (1);
@@ -34,7 +34,7 @@ int	file_checker(char *str)
 
 void	exp_search(char **cmd, t_toolbox *tools)
 {
-	int		i;
+	int	i;
 	char	*aux;
 
 	i = 0;
@@ -67,7 +67,7 @@ void	check_exp(t_sp_cmds *node, t_toolbox *tools)
 	{
 		if (aux_node->cmd != NULL)
 			exp_search(aux_node->cmd, tools);
-		aux_node = aux_node->next;	
+		aux_node = aux_node->next;
 	}
 }
 

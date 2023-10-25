@@ -6,7 +6,7 @@
 #    By: daparici <daparici@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 15:20:41 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/09/27 18:44:08 by daparici         ###   ########.fr        #
+#    Updated: 2023/10/14 19:29:06 by daparici         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ SRCS	=	sources/main.c \
 			sources/built-ins/env.c \
 			sources/built-ins/export.c \
 			sources/built-ins/export_utils.c \
+			sources/lexer/tokenizer.c \
+			sources/lexer/command_utils.c \
 			#sources/built-ins/unset.c \
 			
 
@@ -60,7 +62,7 @@ READ	=  /System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT_A)
-			@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -lreadline -L $(READ)/lib -o $(NAME) 
+			@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -lreadline -L $(READ)/lib -o $(NAME) -fsanitize=address
 			@echo "Linked into excutable \033[0;32mminishell\033[0m."
 
 $(LIBFT_A):	

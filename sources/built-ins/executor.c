@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/26 11:06:50 by daparici         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:30:59 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	ft_executor(t_toolbox *tools)
 		tools->sp_cmds = tools->sp_cmds->next;
 	}
 }
-
