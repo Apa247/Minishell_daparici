@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:14:37 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/10/14 19:32:44 by daparici         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:11:19 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ void	tools_reload(t_toolbox *tools)
 		free(tools->args);
 	tools->args = NULL;
 	tools->lexer_list = NULL;
+	if (tools->cmd)
+		cmd_free(tools->cmd);
+	tools->cmd = NULL;
 }
 
 int	tools_load(t_toolbox *tools)
 {
-	tools->sp_cmds = NULL;
+	tools->cmd = NULL;
 	tools->lexer_list = NULL;
 	return (1);
 }
@@ -44,21 +47,27 @@ int	minishell_loop(t_toolbox *tools)
 		exit = 0;
 		signals_workout();
 		exit = check_input(tools);
-		//tokenizer(tools->args);
 		if (!tools->args && exit == 0)
 			return (exit_code());
 		else if (tools->args && ft_strcmp(tools->args, "") == 0)
+		{
 			free(tools->args);
+		}
 		else if (tools->args)
 		{
 			add_history(tools->args);
 			if (!handle_quotes(tools->args))
 			{
 				token_reader(tools);
-				//lexer_show(tools->lexer_list);
-				//parser(tools);
+				if (!check_syntax(tools->lexer_list))
+				{
+					tools->cmd = parser(tools);
+					expander(tools);
+					get_fds(tools->cmd);
+					ft_executor(tools);
+					//cmd_show(tools->cmd);
+				}
 			}
-			ft_executor(tools);
 			tools_reload(tools);
 		}
 	}

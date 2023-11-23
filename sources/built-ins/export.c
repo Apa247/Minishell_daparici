@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:51:30 by davidaparic       #+#    #+#             */
-/*   Updated: 2023/10/14 17:43:38 by daparici         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:47:40 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	print_export(char **env)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
+	free(env);
 }
 
 char	**add_variable(char **sort_env, char *cmd_arg)
@@ -51,11 +52,12 @@ char	**add_variable(char **sort_env, char *cmd_arg)
 	{
 		if (!sort_env[i + 1])
 		{
-			copy_env[i] = ft_strdup(sort_env[i]);
+			copy_env[i] = sort_env[i];
 			copy_env[i + 1] = ft_strdup(cmd_arg);
+			copy_env[i + 2] = 0;
 		}
 		else
-			copy_env[i] = ft_strdup(sort_env[i]);
+			copy_env[i] = sort_env[i];
 		i++;
 	}
 	return (copy_env);
@@ -66,23 +68,21 @@ void	ft_export(t_toolbox *tools)
 	int		i;
 	char	**tmp;
 
-	i = 1;
-	if (tools->sp_cmds->cmd[1] == NULL)
-		print_export(tools->sort_env);
+	i = 0;
+	if (tools->cmd->args == NULL)
+		print_export(st_envp(tools->env));
 	else
 	{
-		while (tools->sp_cmds->cmd[i])
+		while (tools->cmd->args[i])
 		{
-			if (!check_parametres(tools->sp_cmds->cmd[i])
-				&& !check_variable_exist(tools, tools->sp_cmds->cmd[i]))
+			if (!check_parametres(tools->cmd->args[i])
+				&& !check_variable_exist(tools, tools->cmd->args[i]))
 			{
-				if (tools->sp_cmds->cmd[i])
+				if (tools->cmd->args[i])
 				{
-					tmp = add_variable(tools->sort_env, tools->sp_cmds->cmd[i]);
-					//printf("hola\n");
-					free_arr(tools->sort_env);
-					tools->sort_env = NULL;
-					tools->sort_env = tmp;
+					tmp = add_variable(tools->env, tools->cmd->args[i]);
+					free(tools->env);
+					tools->env = tmp;
 				}
 			}
 			i++;

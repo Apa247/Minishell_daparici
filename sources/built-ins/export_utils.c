@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:52:40 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/26 11:12:32 by daparici         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:20:28 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	check_variable_exist(t_toolbox *tools, char *cmd_arg)
 	int	i;
 
 	i = 0;
-	while (tools->sort_env[i])
+	while (tools->env[i])
 	{
-		if (ft_strncmp(tools->sort_env[i], cmd_arg, !lenght_to_equal(cmd_arg)))
+		if (!ft_strncmp(tools->env[i], cmd_arg, lenght_to_equal(cmd_arg)))
 		{
-			free(tools->sort_env[i]);
-			tools->sort_env[i] = ft_strdup(cmd_arg);
+			free(tools->env[i]);
+			tools->env[i] = ft_strdup(cmd_arg);
 			return (1);
 		}
 		i++;

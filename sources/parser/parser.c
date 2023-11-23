@@ -1,108 +1,107 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_leg.c                                       :+:      :+:    :+:   */
+/*   parser_in_progress_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 18:29:05 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/10/07 18:29:07 by jverdu-r         ###   ########.fr       */
+/*   Created: 2023/10/23 18:38:55 by jverdu-r          #+#    #+#             */
+/*   Updated: 2023/11/03 17:03:53 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_p_toolbox	init_p_tools(t_toolbox *tools)
+t_command	*cmd_list(t_lexer *list)
 {
-	t_p_toolbox	p_tools;
+	t_command	*cmd;
+	t_lexer		*aux;
 
-	p_tools.lexer_list = tools->lexer_list;
-	p_tools.redirections = NULL;
-	p_tools.redirections = 0;
-	p_tools.tools = tools;
-	return (p_tools);
-}
-
-int	word_count(t_lexer *list)
-{
-	int	i;
-
-	if (!list)
-		return (0);
-	i = 0;
-	while (list && list->token == 0)
+	cmd = NULL;
+	aux = list;
+	while (aux)
 	{
-		i++;
-		list = list->next;
+		if (aux->prev == NULL || aux->prev->token == PIPE)
+			comm_addback(&cmd, init_cmd());
+		aux = aux->next;
 	}
-	return (i);
-}
-
-char	**get_cmd(t_lexer *list)
-{
-	int		w_count;
-	char	**cmd;
-	int		i;
-
-	if (list == NULL)
-		return (NULL);
-	w_count = word_count(list);
-	cmd = ft_calloc(w_count + 1, sizeof(char *));
-	if (!cmd)
-		return (NULL);
-	i = 0;
-	while (list && list->token == 0)
-	{
-		cmd[i] = ft_strdup(list->str);
-		i++;
-		list = list->next;
-	}
-	cmd[i] = NULL;
+	while (cmd->prev != NULL)
+		cmd = cmd->prev;
 	return (cmd);
 }
 
-t_sp_cmds	*cmds_extract(t_lexer *list)
+t_lexer	*redir_add(t_command *cmd, t_lexer *list)
 {
-	t_sp_cmds	*node;
-	char		**cmd;
-	t_lexer		*aux;
-	int			tk;
-
-	if (!list)
-		return (NULL);
-	aux = list;
-	node = NULL;
-	while (aux)
+	if (list->token == LESS)
+		redir_addback(&cmd->in_files, redir_new(list->next->str));
+	if (list->token == GREAT)
+		redir_addback(&cmd->out_files, redir_new(list->next->str));
+	if (list->token == LESS_LESS)
 	{
-		tk = 0;
-		if (aux->token == 0)
-		{
-			cmd = get_cmd(aux);
-			while (aux && aux->token == 0)
-				aux = aux->next;
-		}
-		if (aux && aux->token > 0)
-			sp_cmds_addback(&node, sp_cmds_new(cmd, aux->token));
-		if (aux)
-			aux = aux->next;
+		cmd->limiter = ft_strdup(list->next->str);
+		cmd->heredoc = 1;
 	}
-	sp_cmds_addback(&node, sp_cmds_new(cmd, tk));
-	return (node);
+	if (list->token == GREAT_GREAT)
+		cmd->append = ft_strdup(list->next->str);
+	list = list->next;
+	return (list);
 }
 
-t_sp_cmds	*parser(t_toolbox *tools)
+void	get_arg(t_command *cmd, char *str)
 {
-	t_sp_cmds	*node;
-	t_p_toolbox	p_tools;
+	cmd->args = malloc(sizeof(char *) * 2);
+	if (!cmd->args)
+		cmd->args = NULL;
+	cmd->args[0] = ft_strdup(str);
+	cmd->args[1] = 0;
+}
 
-	// if (tools->lexer_list->token == PIPE)
-	// 	return (error_token(tools->lexer_list->token));
-	node = NULL;
-	p_tools = init_p_tools(tools);
-	node = cmds_extract(p_tools.lexer_list);
-	check_exp(node, tools);
-	cmd_trim(node);
-	sp_cmds_show(node);
-	sp_cmds_free(node);
-	return (node);
+void	get_new_arg(t_command *cmd, char *str)
+{
+	char	**aux;
+	int		i;
+
+	i = 0;
+	while (cmd->args[i])
+		i++;
+	aux = malloc(sizeof(char *) * (i + 2));
+	i = 0;
+	while (cmd->args[i])
+	{
+		aux[i] = ft_strdup(cmd->args[i]);
+		i++;
+	}
+	aux[i] = ft_strdup(str);
+	aux[i + 1] = 0;
+	free_arr(cmd->args);
+	cmd->args = aux;
+}
+
+t_command	*parser(t_toolbox *tools)
+{
+	t_lexer		*aux;
+	t_command	*cmd;
+
+	aux = tools->lexer_list;
+	cmd = cmd_list(aux);
+	while (aux)
+	{
+		if (aux->token == PIPE)
+			cmd = cmd->next;
+		else if (aux->token > 1)
+			aux = redir_add(cmd, aux);
+		else if (!cmd->cmd && !aux->token)
+			cmd->cmd = ft_strdup(aux->str);
+		else
+		{
+			if (!cmd->args)
+				get_arg(cmd, aux->str);
+			else
+				get_new_arg(cmd, aux->str);
+		}
+		aux = aux->next;
+	}
+	while (cmd->prev)
+		cmd = cmd->prev;
+	return (cmd);
 }

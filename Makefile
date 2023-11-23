@@ -6,7 +6,7 @@
 #    By: daparici <daparici@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 15:20:41 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/10/14 19:29:06 by daparici         ###   ########.fr        #
+#    Updated: 2023/11/23 17:23:01 by daparici         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT	=	includes/libft/
 
 CC		=	gcc
 
-LIBFT_A	=	$(addprefix $(LIBFT), libft.a)
+LIBFT_A	=	$(addprefix $(LIBFT), libft.a) 
 
 INCLUDE	=	includes -I $(READ)/include
 
@@ -34,35 +34,35 @@ SRCS	=	sources/main.c \
 			sources/lexer/lexer_utils_two.c \
 			sources/lexer/token_handler.c \
 			sources/lexer/token_reader.c \
+			sources/lexer/token_utils.c \
+			sources/parser/command_utils.c \
+			sources/parser/redir_utils.c \
 			sources/parser/parser.c \
-			sources/parser/parser_utils.c \
-			sources/parser/sp_cmds_utils_one.c \
-			sources/parser/sp_cmds_utils_two.c \
+			sources/parser/handle_redirs.c \
 			sources/error/errors.c \
-			sources/expander/expander.c \
+			sources/expander/expander_one.c \
+			sources/expander/expander_two.c \
+			sources/expander/expander_utils_one.c \
+			sources/expander/expander_utils_two.c \
+			sources/expander/lim_trimmer.c \
 			sources/built-ins/echo.c \
-			sources/built-ins/pwd.c \
 			sources/built-ins/executor.c \
+			sources/built-ins/pwd.c \
 			sources/built-ins/env.c \
 			sources/built-ins/export.c \
 			sources/built-ins/export_utils.c \
-			sources/lexer/tokenizer.c \
-			sources/lexer/command_utils.c \
 			#sources/built-ins/unset.c \
 			
 
 OBJS	=	$(SRCS:%.c=%.o)
 
-READ	=  /System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
-#/System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
-#/usr/local/Cellar/readline/8.2.1
-#/System/Volumes/Data/Users/jverdu-r/.brew/Cellar/readline/8.2.1
-#/System/Volumes/Data/sgoinfre/students/daparici/homebrew/Cellar/readline/8.2.1
+READ	=  	/System/Volumes/Data/Users/daparici/.brew/Cellar/readline/8.2.1
+#READ	=  	/usr/local/Cellar/readline/8.2.1
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT_A)
-			@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -lreadline -L $(READ)/lib -o $(NAME) -fsanitize=address
+			@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -lreadline -L $(READ)/lib -o $(NAME)
 			@echo "Linked into excutable \033[0;32mminishell\033[0m."
 
 $(LIBFT_A):	
