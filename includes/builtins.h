@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:56:27 by daparici          #+#    #+#             */
-/*   Updated: 2023/11/23 17:09:38 by daparici         ###   ########.fr       */
+/*   Updated: 2023/11/25 21:30:36 by davidaparic      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,22 @@
 #include <readline/history.h>
 #include "libft/libft.h"
 #include "tokens.h"
+#include "minishell.h"
 
 
 //built-ins funcion
 void	ft_executor(t_toolbox *tools);
+
 //  echo
 void	ft_echo(t_command *cmd);
 void	print_arguments(char **arg, int i);
+
 //  pwd
 int		ft_pwd(void);
+
 // 	env
 void	ft_env(char **env);
+
 //	export
 void	ft_export(t_toolbox *tools);
 char	**add_variable(char **sort_env, char *cmd_arg);
@@ -41,6 +46,10 @@ void	export_error(char *cmd_arg);
 int		lenght_to_equal(char *cmd_arg);
 int		check_variable_exist(t_toolbox *tools, char *cmd_arg);
 int		check_parametres(char *cmd_arg);
+
+// unset
+void	ft_unset(t_toolbox *tools);
+char    **delete_variable(char **env, int i);
 
 
 #endif
