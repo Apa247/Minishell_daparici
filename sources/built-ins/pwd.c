@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:27:31 by daparici          #+#    #+#             */
-/*   Updated: 2023/09/09 17:39:32 by daparici         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:08:18 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	ft_pwd(void)
 	char	*buffer;
 	char	*current_directory;
 
-	buffer = (char *)malloc(PATH_MAX);
+	//buffer = (char *)malloc(PATH_MAX);
+	buffer = ft_calloc(sizeof(char), PATH_MAX);
 	if (buffer == NULL)
 	{
 		perror("Error en la asignacion de memoria");

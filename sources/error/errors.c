@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:32:32 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/06/22 17:45:41 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:52:19 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,5 @@ int	error_token(t_token token)
 		printf("'>>'\n", STDERR_FILENO);
 	return (-1);
 }
+
+

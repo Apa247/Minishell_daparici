@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:56:27 by daparici          #+#    #+#             */
-/*   Updated: 2023/11/25 21:30:36 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/11/28 18:13:13 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 #include "libft/libft.h"
 #include "tokens.h"
 #include "minishell.h"
-
 
 //built-ins funcion
 void	ft_executor(t_toolbox *tools);
@@ -49,7 +48,13 @@ int		check_parametres(char *cmd_arg);
 
 // unset
 void	ft_unset(t_toolbox *tools);
-char    **delete_variable(char **env, int i);
+char	**delete_variable(char **env, int i);
 
+// cd
+void	ft_cd(t_toolbox *tools);
+void	check_cd_arg(t_toolbox *tools, char **arg, char *dir);
+void	change_dir(t_toolbox *tools, char *dir, char *arg);
+void	render_env(t_toolbox *tools);
+char	*get_env_dir(t_toolbox *tools, char *arg);
 
 #endif

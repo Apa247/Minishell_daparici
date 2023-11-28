@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+         #
+#    By: daparici <daparici@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 15:20:41 by jverdu-r          #+#    #+#              #
-#    Updated: 2023/11/25 21:29:16 by davidaparic      ###   ########.fr        #
+#    Updated: 2023/11/28 18:10:45 by daparici         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,13 @@ SRCS	=	sources/main.c \
 			sources/built-ins/export.c \
 			sources/built-ins/export_utils.c \
 			sources/built-ins/unset.c \
+			sources/built-ins/cd.c \
 			
 
 OBJS	=	$(SRCS:%.c=%.o)
 
-#READ	=  	/System/Volumes/Data/Users/daparici/.brew/Cellar/readline/8.2.1
-READ	=  	/usr/local/Cellar/readline/8.2.1
+READ	=  	/System/Volumes/Data/Users/$(USER)/.brew/Cellar/readline/8.2.1
+# READ	=  	/usr/local/Cellar/readline/8.2.1
 
 all:		$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:33:17 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/11/23 19:17:49 by daparici         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:06:14 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	pwd_search(t_toolbox *tools)
 		if (!ft_strncmp(tools->env[i], "OLDPWD=", 7))
 			tools->old_pwd = ft_substr(tools->env[i],
 					7, ft_strlen(tools->env[i]) - 7);
+		// if (!ft_strncmp(tools->env[i], "HOME=", 5))
+		// 	tools->home_dir = ft_substr(tools->env[i],
+		// 			5, ft_strlen(tools->env[i]) - 5);
 		i++;
 	}
 	return (i);

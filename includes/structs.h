@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:25:27 by jverdu-r          #+#    #+#             */
-/*   Updated: 2023/11/03 17:14:40 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:22:20 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ typedef enum	s_token
 	GREAT_GREAT
 }	t_token;
 
-typedef struct  s_redir
+typedef struct	s_redir
 {
-    char    *file;
-    struct s_redir   *next;
-    struct s_redir   *prev;
-}   t_redir;
+	char			*file;
+	struct s_redir	*next;
+	struct s_redir	*prev;
+}	t_redir;
 
 typedef struct s_command
 {
-    char                *cmd;
+    char				*cmd;
 	char				*append;
 	int					heredoc;
     char                *limiter;
@@ -67,6 +67,7 @@ typedef struct	s_toolbox
 	char		*env_rute;
 	char		*pwd;
 	char		*old_pwd;
+	char		*home_dir;
 	t_command	*cmd;
 	t_lexer		*lexer_list;
 }	t_toolbox;

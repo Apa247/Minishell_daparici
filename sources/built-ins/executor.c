@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidaparicio <davidaparicio@student.42    +#+  +:+       +#+        */
+/*   By: daparici <daparici@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:53:02 by daparici          #+#    #+#             */
-/*   Updated: 2023/11/25 21:26:01 by davidaparic      ###   ########.fr       */
+/*   Updated: 2023/11/28 18:10:24 by daparici         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_executor(t_toolbox *tools)
 			ft_export(tools);
 		if (ft_strcmp(cmd->cmd, "unset") == 0)
 			ft_unset(tools);
+		if (ft_strcmp(cmd->cmd, "cd") == 0)
+			ft_cd(tools);
 		cmd = cmd->next;
 	}
 }
